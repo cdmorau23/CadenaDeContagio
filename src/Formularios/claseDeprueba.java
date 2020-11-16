@@ -10,5 +10,10 @@ package Formularios;
  * @author ASUS
  */
 public class claseDeprueba {
+
+    public claseDeprueba() {
+        System.out.println("HolaMundo");
+    }
+    
     
 }
