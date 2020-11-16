@@ -33,12 +33,20 @@ public class TablaPacienteP extends javax.swing.JFrame {
     /**
      * Creates new form sistema
      */
-    DoubleLinkedList<PacienteP> ListaPacientesP =new DoubleLinkedList<PacienteP>();
-    MyStack<PacienteP> Respaldo = new MyStack<PacienteP>();
-    conexionSQL cc = new conexionSQL();
-    Connection con = (Connection) cc.conexion();
+    public static DoubleLinkedList<PacienteP> ListaPacientesP ;
+    public static MyStack<PacienteP> Respaldo;
+    public static conexionSQL cc;
+    public static Connection con;
+    public static Main Origen;
     
-    public TablaPacienteP() throws SQLException {
+    public TablaPacienteP(Main origen) throws SQLException {
+        
+        this.ListaPacientesP = Origen.ListaPacientesP;
+        this.Respaldo = Origen.RespaldoP;
+        this.cc= Origen.cc;
+        this.con = Origen.con;
+        this.Origen = origen;
+        
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(getBackground());
@@ -85,6 +93,7 @@ public class TablaPacienteP extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtBusqueda = new javax.swing.JTextField();
         btBuscar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jTextField6.setText("jTextField6");
 
@@ -246,41 +255,52 @@ public class TablaPacienteP extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Administrar contactos del paciente positivo seleccionado");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
                         .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btBuscar)
                         .addGap(129, 129, 129))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(17, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btBuscar)
                             .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addGap(63, 63, 63)
-                        .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                        .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addContainerGap())))
         );
 
         pack();
@@ -347,6 +367,18 @@ public class TablaPacienteP extends javax.swing.JFrame {
         
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRestaurarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int filaSeleccionada = tablaPersona.getSelectedRow();
+        int Id = Integer.parseInt((String)tablaPersona.getValueAt(filaSeleccionada, 0));
+        try {
+            TablaPacienteNE pe = new TablaPacienteNE(Id,this.Origen);
+            pe.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(TablaPacienteP.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     public void Respaldo(){
         if(Respaldo.isEmpty()==false){
@@ -652,7 +684,7 @@ public class TablaPacienteP extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new TablaPacienteP().setVisible(true);
+                    new TablaPacienteP(Origen).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(TablaPacienteP.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -669,6 +701,7 @@ public class TablaPacienteP extends javax.swing.JFrame {
     private javax.swing.JButton btGuardar;
     private javax.swing.JButton btNuevo;
     private javax.swing.JButton btnRestaurar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;

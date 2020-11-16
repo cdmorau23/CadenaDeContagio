@@ -7,6 +7,7 @@ package Formularios;
 
 import ClasesPaciente.Arbol;
 import ClasesPaciente.PacienteNE;
+import ClasesPaciente.PacienteP;
 import conexionSQL.conexionSQL;
 import utils.DoubleLinkedList;
 import utils.MyStack;
@@ -34,12 +35,22 @@ public class TablaPacienteNE extends javax.swing.JFrame {
     /**
      * Creates new form sistema
      */
-    DoubleLinkedList<PacienteNE> ListaPacientesNE =new DoubleLinkedList<PacienteNE>();
-    MyStack<PacienteNE> Respaldo = new MyStack<PacienteNE>();
-    conexionSQL cc = new conexionSQL();
-    Connection con = (Connection) cc.conexion();
+    public static DoubleLinkedList<PacienteNE> ListaPacientesNE ;
+    public static MyStack<PacienteNE> Respaldo;
+    public static conexionSQL cc;
+    public static Connection con;
+    public static int contacto;
+    public static Main Origen;
+
     
-    public TablaPacienteNE() throws SQLException {
+    public TablaPacienteNE(int IDContacto, Main Origen) throws SQLException {
+        this.contacto = IDContacto;
+        this.ListaPacientesNE = Origen.ListaPacientesNE;
+        this.Respaldo= Origen.RespaldoNE;
+        this.cc = Origen.cc;
+        this.con = Origen.con;
+        this.Origen = Origen;
+        
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(getBackground());
@@ -744,7 +755,7 @@ public class TablaPacienteNE extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new TablaPacienteNE().setVisible(true);
+                    new TablaPacienteNE(contacto,Origen).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(TablaPacienteNE.class.getName()).log(Level.SEVERE, null, ex);
                 }

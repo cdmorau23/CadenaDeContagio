@@ -17,14 +17,17 @@ import utils.DoubleLinkedList;
  * @author sordo
  */
 public class Login extends javax.swing.JFrame {
-    TablaPacienteP pp=new TablaPacienteP();
+    
+    TablaPacienteP pp;
         DoubleLinkedList<PacienteP> ppl=pp.LlenarListalistp();
-        TablaPacienteNE pn=new TablaPacienteNE();
+        TablaPacienteNE pn;
         DoubleLinkedList<PacienteNE> pnl=pn.LlenarListalistne();
     /**
      * Creates new form Login
      */
-    public Login() throws SQLException {
+    public Login(Main Origen) throws SQLException {
+        this.ppl = Origen.ListaPacientesP;
+
         initComponents();
         this.setLocationRelativeTo(null);
         
@@ -169,11 +172,6 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new Login().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
         });
     }

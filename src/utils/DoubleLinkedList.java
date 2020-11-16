@@ -239,6 +239,8 @@ public class DoubleLinkedList<E> extends List<E>{
         }
         return isIn;
     }
+    
+   
 
     @Override
     public String toString(){
