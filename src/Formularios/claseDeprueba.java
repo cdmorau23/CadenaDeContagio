@@ -16,7 +16,7 @@ public class claseDeprueba {
         int i=0;
         
         System.out.println("Adiosdd");
-        int i=0;
+        int s=0;
         
     }
     
