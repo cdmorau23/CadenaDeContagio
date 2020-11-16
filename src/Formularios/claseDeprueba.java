@@ -12,7 +12,7 @@ package Formularios;
 public class claseDeprueba {
 
     public claseDeprueba() {
-        System.out.println("HolaMundo");
+        System.out.println("Adios");
     }
     
     
