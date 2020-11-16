@@ -12,22 +12,15 @@ package Formularios;
 public class claseDeprueba {
 
     public claseDeprueba() {
-        System.out.println("HolaMundo");
-        int i = 8;
-        String n = "algo";
         
         
+        System.out.println("Adiosdd");
+        int o=0;
+        System.out.println(o+9);
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        System.out.println("hola");
+        System.out.println("Adiosdd");
+        int s=0;
+        System.out.println(s+9);
     }
     
     
