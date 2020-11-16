@@ -13,6 +13,8 @@ public class claseDeprueba {
 
     public claseDeprueba() {
         System.out.println("HolaMundo");
+        int i = 8;
+        String n = "algo";
     }
     
     
