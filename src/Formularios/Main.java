@@ -28,7 +28,7 @@ public class Main extends javax.swing.JFrame {
      */
     public static DoubleLinkedList<PacienteNE> ListaPacientesNE =new DoubleLinkedList<PacienteNE>();
     public static DoubleLinkedList<PacienteP> ListaPacientesP =new DoubleLinkedList<PacienteP>();
-    public MyStack<Acciones> RespaldoNE = new MyStack<Acciones>();
+    public static MyStack<Acciones> RespaldoNE = new MyStack<Acciones>();
     public static MyStack<PacienteP> RespaldoP = new MyStack<PacienteP>();
     public static conexionSQL cc = new conexionSQL();
     public static Connection con = (Connection) cc.conexion();

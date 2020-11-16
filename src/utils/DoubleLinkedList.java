@@ -145,13 +145,7 @@ public class DoubleLinkedList<E> extends List<E>{
 
     @Override
     public boolean isEmpty() {
-        if (this.first==null){
-            return true;
-        }
-        else{
-            return false;
-
-        }
+        return this.first==null;
     }
 
     @Override

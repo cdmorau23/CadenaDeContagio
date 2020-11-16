@@ -14,8 +14,8 @@ class NodeStack<E> {
 
 public class MyStack<E> {
 
-    private NodeStack<E> top;
-    private Integer length;
+    public NodeStack<E> top;
+    public Integer length;
 
     public MyStack(){
         this.top = null;

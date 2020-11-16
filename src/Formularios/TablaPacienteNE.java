@@ -46,12 +46,12 @@ public class TablaPacienteNE extends javax.swing.JFrame {
 
     
     public TablaPacienteNE(int IDContacto, Main Origen) throws SQLException {
-        this.contacto = IDContacto;
-        this.ListaPacientesNE = Origen.ListaPacientesNE;
-        this.AtrasNE= Origen.RespaldoNE;
-        this.cc = Origen.cc;
-        this.con = Origen.con;
-        this.Origen = Origen;
+        TablaPacienteNE.contacto = IDContacto;
+        TablaPacienteNE.ListaPacientesNE = Main.ListaPacientesNE;
+        TablaPacienteNE.AtrasNE= Main.RespaldoNE;
+        TablaPacienteNE.cc = Main.cc;
+        TablaPacienteNE.con = Main.con;
+        TablaPacienteNE.Origen = Origen;
         
         initComponents();
         this.setLocationRelativeTo(null);
@@ -341,7 +341,7 @@ public class TablaPacienteNE extends javax.swing.JFrame {
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
         insertarDatos();
         limpiarCeldas();
-        mostrarDatos();
+        mostrarDatos();        // TODO add your handling code here:
     }//GEN-LAST:event_btGuardarActionPerformed
                                                 
 
@@ -393,13 +393,11 @@ public class TablaPacienteNE extends javax.swing.JFrame {
 
     private void btnAfterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfterActionPerformed
         // TODO add your handling code here:
-        Adelante();
-        mostrarDatos();
-        limpiarCeldas();
+        
     }//GEN-LAST:event_btnAfterActionPerformed
     
     public void Respaldo(){
-        if(!AtrasNE.isEmpty()){
+        if(AtrasNE.length!=0){
         try {           
             String SQL = AtrasNE.top().getInversa();
             AdelanteNE.push(AtrasNE.pop());
@@ -436,11 +434,11 @@ public class TablaPacienteNE extends javax.swing.JFrame {
     
     
     
+    
     public void LlenarLista() throws SQLException{
         
-        while(ListaPacientesNE.isEmpty()==false){
-            ListaPacientesNE.deleteFirst();
-        }
+        DoubleLinkedList<PacienteNE> ListaN = new DoubleLinkedList<>();
+        ListaPacientesNE = ListaN;
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
         String fecha;
 
@@ -543,12 +541,12 @@ public class TablaPacienteNE extends javax.swing.JFrame {
 
         LlenarLista();
         PacienteNE juanito2 = busquedaCC(juanito.getCedula());
-        String SQL2= juanito2.getInsertArbol(this.contacto);
+        String SQL2= juanito2.getInsertArbol(contacto);
         PreparedStatement pst2 =(PreparedStatement) con.prepareStatement(SQL2); 
         pst2.execute();
         
         AtrasNE.push(new Acciones(juanito2.getInsertInicial(),juanito2.getDeleteInicial()));
-        AtrasNE.push(new Acciones(juanito2.getDeleteArbol(),juanito2.getInsertArbol(this.contacto)));
+        AtrasNE.push(new Acciones(juanito2.getDeleteArbol(),juanito2.getInsertArbol(contacto)));
         
         JOptionPane.showMessageDialog(null, "RegistroExitoso");   
         }
@@ -615,7 +613,7 @@ public class TablaPacienteNE extends javax.swing.JFrame {
             st.execute(SQL);
 
             AtrasNE.push(new Acciones(SQL,paciente.getInsertInicial()));
-            AtrasNE.push(new Acciones(SQL1,paciente.getInsertArbol(this.contacto)));
+            AtrasNE.push(new Acciones(SQL1,paciente.getInsertArbol(contacto)));
             ListaPacientesNE.delete(paciente);
 
             
