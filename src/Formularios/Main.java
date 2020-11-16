@@ -5,6 +5,7 @@
  */
 package Formularios;
 
+import ClasesPaciente.Acciones;
 import ClasesPaciente.Arbol;
 import ClasesPaciente.PacienteNE;
 import ClasesPaciente.PacienteP;
@@ -27,7 +28,7 @@ public class Main extends javax.swing.JFrame {
      */
     public static DoubleLinkedList<PacienteNE> ListaPacientesNE =new DoubleLinkedList<PacienteNE>();
     public static DoubleLinkedList<PacienteP> ListaPacientesP =new DoubleLinkedList<PacienteP>();
-    public static MyStack<PacienteNE> RespaldoNE = new MyStack<PacienteNE>();
+    public MyStack<Acciones> RespaldoNE = new MyStack<Acciones>();
     public static MyStack<PacienteP> RespaldoP = new MyStack<PacienteP>();
     public static conexionSQL cc = new conexionSQL();
     public static Connection con = (Connection) cc.conexion();

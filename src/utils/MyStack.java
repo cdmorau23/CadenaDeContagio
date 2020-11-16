@@ -50,8 +50,9 @@ public class MyStack<E> {
     }
 
     public void clear(){
-        this.top = null;
-        this.length = 0;
+        while (!this.isEmpty()){
+          this.pop();
+        }
     }
 
     public boolean isEmpty(){

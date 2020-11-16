@@ -5,6 +5,7 @@
  */
 package Formularios;
 
+import ClasesPaciente.Acciones;
 import ClasesPaciente.Arbol;
 import ClasesPaciente.PacienteNE;
 import ClasesPaciente.PacienteP;
@@ -36,7 +37,8 @@ public class TablaPacienteNE extends javax.swing.JFrame {
      * Creates new form sistema
      */
     public static DoubleLinkedList<PacienteNE> ListaPacientesNE ;
-    public static MyStack<PacienteNE> Respaldo;
+    public static MyStack<Acciones> AtrasNE;
+    public static MyStack<Acciones> AdelanteNE;
     public static conexionSQL cc;
     public static Connection con;
     public static int contacto;
@@ -46,7 +48,7 @@ public class TablaPacienteNE extends javax.swing.JFrame {
     public TablaPacienteNE(int IDContacto, Main Origen) throws SQLException {
         this.contacto = IDContacto;
         this.ListaPacientesNE = Origen.ListaPacientesNE;
-        this.Respaldo= Origen.RespaldoNE;
+        this.AtrasNE= Origen.RespaldoNE;
         this.cc = Origen.cc;
         this.con = Origen.con;
         this.Origen = Origen;
@@ -91,9 +93,10 @@ public class TablaPacienteNE extends javax.swing.JFrame {
         btActualizar = new javax.swing.JButton();
         txtCedula = new javax.swing.JTextField();
         Nombre1 = new javax.swing.JLabel();
-        btnRestaurar = new javax.swing.JButton();
         Nombre2 = new javax.swing.JLabel();
         txtRB1 = new javax.swing.JComboBox<>();
+        btnRestaurar = new javax.swing.JButton();
+        btnAfter = new javax.swing.JButton();
         scroll = new javax.swing.JScrollPane();
         tablaPersona = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
@@ -155,19 +158,26 @@ public class TablaPacienteNE extends javax.swing.JFrame {
 
         Nombre1.setText("Cedula");
 
-        btnRestaurar.setText("Restaurar");
-        btnRestaurar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRestaurarActionPerformed(evt);
-            }
-        });
-
         Nombre2.setText("Riesgo Biologico");
 
         txtRB1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "True", "False" }));
         txtRB1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtRB1ActionPerformed(evt);
+            }
+        });
+
+        btnRestaurar.setText("Before");
+        btnRestaurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestaurarActionPerformed(evt);
+            }
+        });
+
+        btnAfter.setText("After");
+        btnAfter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAfterActionPerformed(evt);
             }
         });
 
@@ -183,31 +193,35 @@ public class TablaPacienteNE extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(Nombre1)
                     .addComponent(Nombre2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtRB1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(btNuevo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addContainerGap(85, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(btNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btGuardar)
-                .addGap(27, 27, 27)
-                .addComponent(btEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(btnRestaurar)
-                .addGap(18, 18, 18)
-                .addComponent(btActualizar)
-                .addGap(28, 28, 28))
+                .addGap(44, 44, 44)
+                .addComponent(btEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(btActualizar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnRestaurar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAfter, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Nombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -227,14 +241,16 @@ public class TablaPacienteNE extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Nombre2)
                     .addComponent(txtRB1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btActualizar)
-                    .addComponent(btnRestaurar)
-                    .addComponent(btEliminar)
-                    .addComponent(btGuardar)
-                    .addComponent(btNuevo))
-                .addGap(22, 22, 22))
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(btGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnRestaurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAfter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         tablaPersona.setModel(new javax.swing.table.DefaultTableModel(
@@ -294,9 +310,9 @@ public class TablaPacienteNE extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -325,7 +341,7 @@ public class TablaPacienteNE extends javax.swing.JFrame {
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
         insertarDatos();
         limpiarCeldas();
-        mostrarDatos();        // TODO add your handling code here:
+        mostrarDatos();
     }//GEN-LAST:event_btGuardarActionPerformed
                                                 
 
@@ -374,21 +390,52 @@ public class TablaPacienteNE extends javax.swing.JFrame {
     private void txtRB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRB1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRB1ActionPerformed
+
+    private void btnAfterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfterActionPerformed
+        // TODO add your handling code here:
+        Adelante();
+        mostrarDatos();
+        limpiarCeldas();
+    }//GEN-LAST:event_btnAfterActionPerformed
     
     public void Respaldo(){
-        if(Respaldo.isEmpty()==false){
-            PacienteNE paciente = Respaldo.pop();
-            ListaPacientesNE.insert(paciente);
+        if(!AtrasNE.isEmpty()){
         try {           
-            String SQL= paciente.getInsert();
+            String SQL = AtrasNE.top().getInversa();
+            AdelanteNE.push(AtrasNE.pop());
             PreparedStatement pst =(PreparedStatement) con.prepareStatement(SQL);
             pst.execute();
+            SQL= AtrasNE.pop().Inversa;
+            AdelanteNE.push(AtrasNE.pop());
+            PreparedStatement st =(PreparedStatement) con.prepareStatement(SQL);
+            st.execute();
+            LlenarLista();
         } catch (SQLException ex) {
             Logger.getLogger(TablaPacienteNE.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
         
+    } 
+    public void Adelante(){
+        if(!AdelanteNE.isEmpty()){
+        try {           
+            String SQL = AdelanteNE.top().getAccionOriginal();
+            AtrasNE.push(AtrasNE.pop());
+            PreparedStatement pst =(PreparedStatement) con.prepareStatement(SQL);
+            pst.execute();
+            SQL = AdelanteNE.top().getAccionOriginal();
+            AtrasNE.push(AtrasNE.pop());
+            PreparedStatement st =(PreparedStatement) con.prepareStatement(SQL);
+            st.execute();
+            LlenarLista();
+        } catch (SQLException ex) {
+            Logger.getLogger(TablaPacienteNE.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
     }
+    
+    
+    
     public void LlenarLista() throws SQLException{
         
         while(ListaPacientesNE.isEmpty()==false){
@@ -415,7 +462,8 @@ public class TablaPacienteNE extends javax.swing.JFrame {
                         rs.getString("Direccion"),
                         fecha,
                         Integer.parseInt(rs.getString("N_Arboles")),
-                        Integer.parseInt(rs.getString("R_Biologico"))                       
+                        Integer.parseInt(rs.getString("R_Biologico")),
+                        Integer.parseInt(rs.getString("Contactado"))                       
                         );
                 ListaPacientesNE.insert(Juanito);
             }
@@ -429,46 +477,9 @@ public class TablaPacienteNE extends javax.swing.JFrame {
         }
         
     }
-    public DoubleLinkedList<PacienteNE> LlenarListalistne() throws SQLException{
-        
-        
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
-        String fecha;
 
-        String SQL = "SELECT * FROM `paciente_ne`;";
-        
-        try{
-            Statement st = (Statement) con.createStatement();
-            ResultSet rs = (ResultSet) st.executeQuery(SQL);
-            while(rs.next()){
-
-                
-                fecha = formatoFecha.format(rs.getDate("FechaIngreso"));
-
-                PacienteNE Juanito = new PacienteNE(
-                        Integer.parseInt(rs.getString("IdN")),
-                        rs.getString("Nombre"),
-                        Integer.parseInt(rs.getString("Cedula")),
-                        rs.getString("Telefono"),
-                        rs.getString("Direccion"),
-                        fecha,
-                        Integer.parseInt(rs.getString("N_Arboles")),
-                        Integer.parseInt(rs.getString("R_Biologico"))                       
-                        );
-                ListaPacientesNE.insert(Juanito);
-            }
-            
-        }
-        catch(Exception e){
-            
-            JOptionPane.showMessageDialog(null, "No se pudo añadir a la lista" +e.getMessage());
-
-            
-        }
-        return ListaPacientesNE;
-    }
     public PacienteNE busqueda(int id){
-        if (ListaPacientesNE.isEmpty()){return null;}
+        if(ListaPacientesNE.isEmpty()){return null;}
         Node<PacienteNE> busqueda = ListaPacientesNE.first;
         
         while(busqueda.value != null){
@@ -484,8 +495,8 @@ public class TablaPacienteNE extends javax.swing.JFrame {
     }
     
     public PacienteNE busquedaCC(int CC){
-        if (ListaPacientesNE.isEmpty()){return null;}
-        Node<PacienteNE> busqueda = ListaPacientesNE.first;
+        if (this.ListaPacientesNE.isEmpty()){return null;}
+        Node<PacienteNE> busqueda = this.ListaPacientesNE.first;
 
         while(busqueda.value != null){
             if (busqueda.value.getCedula()==CC){
@@ -497,6 +508,16 @@ public class TablaPacienteNE extends javax.swing.JFrame {
             return null;
         }
     return busqueda.value;
+    }
+    
+    public void ImprimirLista(){
+    if(!ListaPacientesNE.isEmpty()){
+    Node<PacienteNE> busqueda = this.ListaPacientesNE.first;
+    for (int i = 0; i<ListaPacientesNE.length();i++){
+                JOptionPane.showMessageDialog(null, busqueda.value.getNombre());
+                busqueda= busqueda.next;
+        }
+    }
     }
     
     
@@ -511,21 +532,28 @@ public class TablaPacienteNE extends javax.swing.JFrame {
             seleccionado = 0;
         }
         
-        PacienteNE juanito = new PacienteNE(null,txtNombre.getText(),Integer.parseInt(txtCedula.getText()),txtTelefono.getText(),txtDireccion.getText(),"",1,seleccionado);
+        PacienteNE juanito = new PacienteNE(null,txtNombre.getText(),Integer.parseInt(txtCedula.getText()),txtTelefono.getText(),txtDireccion.getText(),"",1,seleccionado,0);
         
         
         try{
-        String SQL= juanito.getInsert();
-        PreparedStatement pst =(PreparedStatement) con.prepareStatement(SQL);  
+        String SQL= juanito.getInsertInicial();
+        PreparedStatement pst =(PreparedStatement) con.prepareStatement(SQL);
         pst.execute();
-        pst.close();
-        LlenarLista();  
+                ImprimirLista();
+
+        LlenarLista();
+        PacienteNE juanito2 = busquedaCC(juanito.getCedula());
+        String SQL2= juanito2.getInsertArbol(this.contacto);
+        PreparedStatement pst2 =(PreparedStatement) con.prepareStatement(SQL2); 
+        pst2.execute();
         
+        AtrasNE.push(new Acciones(juanito2.getInsertInicial(),juanito2.getDeleteInicial()));
+        AtrasNE.push(new Acciones(juanito2.getDeleteArbol(),juanito2.getInsertArbol(this.contacto)));
         
         JOptionPane.showMessageDialog(null, "RegistroExitoso");   
         }
         catch(Exception e){
-        JOptionPane.showMessageDialog(null, "R No Exitoso"+e.getMessage());
+        JOptionPane.showMessageDialog(null, "Registro No Exitoso"+e.getMessage());
 
         }
         
@@ -537,6 +565,7 @@ public class TablaPacienteNE extends javax.swing.JFrame {
         int filaSeleccionada = tablaPersona.getSelectedRow();
         int Id = Integer.parseInt((String)tablaPersona.getValueAt(filaSeleccionada, 0));
         PacienteNE paciente = busqueda(Id);
+        String antiUpdate = paciente.getUpdate();
         
         try{              
         
@@ -555,11 +584,14 @@ public class TablaPacienteNE extends javax.swing.JFrame {
         }
         paciente.setR_Biologico(seleccionado);
 
+       
         
-
         String SQL = paciente.getUpdate();
         PreparedStatement pst =(PreparedStatement) con.prepareStatement(SQL);
         pst.execute();
+        AtrasNE.push(new Acciones(SQL,antiUpdate));
+        AtrasNE.push(new Acciones(SQL,antiUpdate));
+        
         
         JOptionPane.showMessageDialog(null, "Registro Editado Exitosamente");   
         }
@@ -577,12 +609,15 @@ public class TablaPacienteNE extends javax.swing.JFrame {
         try{
             
             Statement st= (Statement) con.createStatement();
-            String SQL = paciente.getDelete();
-            Respaldo.push(paciente);
+            String SQL1 = paciente.getDeleteArbol();
+            st.execute(SQL1);
+            String SQL = paciente.getDeleteInicial();
+            st.execute(SQL);
+
+            AtrasNE.push(new Acciones(SQL,paciente.getInsertInicial()));
+            AtrasNE.push(new Acciones(SQL1,paciente.getInsertArbol(this.contacto)));
             ListaPacientesNE.delete(paciente);
 
-            st.execute(SQL);
-            
             
             JOptionPane.showMessageDialog(null, "Registro eliminado");
             
@@ -597,7 +632,8 @@ public class TablaPacienteNE extends javax.swing.JFrame {
         txtCedula.setText("");
         txtNombre.setText("");
         txtDireccion.setText("");
-        txtTelefono.setText(""); 
+        txtTelefono.setText("");
+        txtRB1.setSelectedIndex(0);
         
     }
     
@@ -772,6 +808,7 @@ public class TablaPacienteNE extends javax.swing.JFrame {
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btGuardar;
     private javax.swing.JButton btNuevo;
+    private javax.swing.JButton btnAfter;
     private javax.swing.JButton btnRestaurar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

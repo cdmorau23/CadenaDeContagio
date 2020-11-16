@@ -467,7 +467,7 @@ public class TablaPacienteP extends javax.swing.JFrame {
         return ListaPacientesP;
     }
     public PacienteP busqueda(int id){
-    
+        if(ListaPacientesP.isEmpty()){return null;}
         Node<PacienteP> busqueda = ListaPacientesP.first;
 
         while(busqueda.value != null){
@@ -475,6 +475,9 @@ public class TablaPacienteP extends javax.swing.JFrame {
                 break;
             }
             busqueda = busqueda.next;  
+        }
+        if(busqueda == null){
+            return null;
         }
     return busqueda.value;
     }

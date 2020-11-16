@@ -57,9 +57,9 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtBusqueda" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -92,7 +92,7 @@
                       <Component id="Nombre1" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="Nombre2" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="78" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="txtRB1" min="-2" pref="182" max="-2" attributes="0"/>
                       <Component id="txtCedula" min="-2" pref="182" max="-2" attributes="0"/>
@@ -100,27 +100,34 @@
                       <Component id="txtNombre" alignment="0" min="-2" pref="182" max="-2" attributes="0"/>
                       <Component id="txtTelefono" min="-2" pref="182" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="146" max="32767" attributes="0"/>
+                  <EmptySpace pref="85" max="32767" attributes="0"/>
               </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="btNuevo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="31" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="btNuevo" min="-2" pref="77" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="btGuardar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                  <Component id="btEliminar" min="-2" pref="81" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                  <Component id="btnRestaurar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btActualizar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                  <Component id="btEliminar" min="-2" pref="83" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          <Component id="btActualizar" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="btnRestaurar" min="-2" pref="65" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnAfter" min="-2" pref="65" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Nombre" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -145,15 +152,18 @@
                       <Component id="Nombre2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtRB1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="39" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btActualizar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnRestaurar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btEliminar" pref="32" max="32767" attributes="0"/>
+                      <Component id="btGuardar" max="32767" attributes="0"/>
+                      <Component id="btNuevo" max="32767" attributes="0"/>
+                      <Component id="btActualizar" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btnRestaurar" max="32767" attributes="0"/>
+                      <Component id="btnAfter" max="32767" attributes="0"/>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -225,14 +235,6 @@
             <Property name="text" type="java.lang.String" value="Cedula"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnRestaurar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Restaurar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRestaurarActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="Nombre2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Riesgo Biologico"/>
@@ -253,6 +255,22 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnRestaurar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Before"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRestaurarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnAfter">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="After"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAfterActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
