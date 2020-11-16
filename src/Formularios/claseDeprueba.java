@@ -14,6 +14,10 @@ public class claseDeprueba {
     public claseDeprueba() {
         System.out.println("Adiosdd");
         int i=0;
+        
+        System.out.println("Adiosdd");
+        int i=0;
+        
     }
     
     
