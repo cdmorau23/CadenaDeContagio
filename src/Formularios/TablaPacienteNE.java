@@ -346,7 +346,11 @@ public class TablaPacienteNE extends javax.swing.JFrame {
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
         insertarDatos();
         limpiarCeldas();
-        mostrarDatos();        // TODO add your handling code here:
+        try {
+            mostrarDatos();        // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(TablaPacienteNE.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btGuardarActionPerformed
                                                 
 
@@ -364,13 +368,21 @@ public class TablaPacienteNE extends javax.swing.JFrame {
         // TODO add your handling code here:
         ActualizarDatos();
         limpiarCeldas();
-        mostrarDatos();
+        try {
+            mostrarDatos();
+        } catch (SQLException ex) {
+            Logger.getLogger(TablaPacienteNE.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btActualizarActionPerformed
 
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
         // TODO add your handling code here:
         eliminarRegistros();
-        mostrarDatos();
+        try {
+            mostrarDatos();
+        } catch (SQLException ex) {
+            Logger.getLogger(TablaPacienteNE.class.getName()).log(Level.SEVERE, null, ex);
+        }
         limpiarCeldas();
     }//GEN-LAST:event_btEliminarActionPerformed
 
@@ -386,7 +398,11 @@ public class TablaPacienteNE extends javax.swing.JFrame {
 
     private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
         Respaldo();
-        mostrarDatos();
+        try {
+            mostrarDatos();
+        } catch (SQLException ex) {
+            Logger.getLogger(TablaPacienteNE.class.getName()).log(Level.SEVERE, null, ex);
+        }
         limpiarCeldas();
         
         // TODO add your handling code here:
@@ -640,9 +656,14 @@ public class TablaPacienteNE extends javax.swing.JFrame {
         
     }
     
-    public void mostrarDatos() {
+    public void mostrarDatos() throws SQLException{
               
-        
+        ArbolBinario abo = new ArbolBinario ();
+        LlenarLista();
+        for(int i=0;i<ListaPacientesNE.length();i++){
+            abo.insertar(ListaPacientesNE.getAtIndex(i));
+        }
+        abo.imprimirPre();
         String[] titulos = {"IdN","Nombre","Cedula","Telefono","Direccion","FechaIngreso","N_Arboles","R_Biologico"};
         String[] registros = new String[10];
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");

@@ -81,15 +81,14 @@ public class ArbolBinario {
     }
     
     
-    private PacienteNE imprimirPre (Nodo reco)
+    private void imprimirPre (Nodo reco)
       {
           if (reco != null)
           {
-              return reco.nn;
+              System.out.print(reco.nn.Nombre + " ");
               imprimirPre (reco.izq);
-              imprimirPre (reco.der);
+              
           }
-        return null;
       }
 
       public void imprimirPre ()
