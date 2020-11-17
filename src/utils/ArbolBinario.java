@@ -9,7 +9,13 @@ package utils;
 
 import ClasesPaciente.PacienteNE;
 import Formularios.TablaPacienteNE;
+import static Formularios.TablaPacienteNE.ListaPacientesNE;
+import static Formularios.TablaPacienteNE.con;
+import com.mysql.jdbc.Statement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,7 +23,8 @@ import java.sql.SQLException;
  */
 public class ArbolBinario {
     class Nodo
-    {
+    {   
+        DoubleLinkedList<PacienteNE> PacientesNE = ListaPacientesNE;
         PacienteNE nn;
         Nodo izq, der;
         public Nodo(PacienteNE nn){
@@ -81,21 +88,73 @@ public class ArbolBinario {
     }
     
     
-    private PacienteNE imprimirPre (Nodo reco)
+    
+
+      private void imprimirPre (Nodo reco)
       {
           if (reco != null)
           {
-              return reco.nn;
+              System.out.print(reco.nn.Nombre + " ");
               imprimirPre (reco.izq);
               imprimirPre (reco.der);
           }
-        return null;
       }
 
       public void imprimirPre ()
       {
           imprimirPre (raiz);
+          System.out.println();
       }
+      
+      public void LlenarArbol() throws SQLException{
+          this.LlenarLista();
+          while(ListaPacientesNE.size>0){
+              this.insertar(ListaPacientesNE.getFirst());
+              ListaPacientesNE.deleteFirst();
+          }
+          this.LlenarLista();
+      }
+      
+      public void LlenarLista() throws SQLException{
+        
+        DoubleLinkedList<PacienteNE> ListaN = new DoubleLinkedList<>();
+        ListaPacientesNE = ListaN;
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+        String fecha;
+
+        String SQL = "SELECT * FROM `paciente_ne`;";
+        
+        try{
+            Statement st = (Statement) con.createStatement();
+            ResultSet rs = (ResultSet) st.executeQuery(SQL);
+            while(rs.next()){
+
+                
+                fecha = formatoFecha.format(rs.getDate("FechaIngreso"));
+
+                PacienteNE Juanito = new PacienteNE(
+                        Integer.parseInt(rs.getString("IdN")),
+                        rs.getString("Nombre"),
+                        Integer.parseInt(rs.getString("Cedula")),
+                        rs.getString("Telefono"),
+                        rs.getString("Direccion"),
+                        fecha,
+                        Integer.parseInt(rs.getString("N_Arboles")),
+                        Integer.parseInt(rs.getString("R_Biologico")),
+                        Integer.parseInt(rs.getString("Contactado"))                       
+                        );
+                ListaPacientesNE.insert(Juanito);
+            }
+
+        }
+        catch(Exception e){
+            
+            JOptionPane.showMessageDialog(null, "No se pudo añadir a la lista" +e.getMessage());
+
+            
+        }
+        
+    }
          
     public boolean pacienteseleccion(PacienteNE n1,PacienteNE n2){
         
@@ -123,6 +182,9 @@ public class ArbolBinario {
     }
     public static void main (String [] ar) throws SQLException
     {
+        ArbolBinario a = new ArbolBinario();
+        a.LlenarArbol();
+        a.imprimirPre();
         
     }      
 }
