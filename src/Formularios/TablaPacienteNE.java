@@ -590,6 +590,7 @@ public class TablaPacienteNE extends javax.swing.JFrame {
        
         
         String SQL = paciente.getUpdate();
+        System.out.println(SQL);
         PreparedStatement pst =(PreparedStatement) con.prepareStatement(SQL);
         pst.execute();
         AtrasNE.push(new Acciones(SQL,antiUpdate));
