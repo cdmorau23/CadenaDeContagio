@@ -6,7 +6,6 @@
 package Formularios;
 
 import ClasesPaciente.PacienteP;
-import Formularios.TablaPacienteP.ListaPacientesP;
 import utils.DoubleLinkedList;
 import utils.Node;
 
