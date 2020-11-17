@@ -49,6 +49,12 @@ public class Arbol{
         }
     }
     public void llenarar(){
+        
+        if(aa.first!=null){
+               DoubleLinkedList<ClaseArbol> rezero = new DoubleLinkedList<>() ;
+               aa = rezero;
+        }
+        
         String SQL="SELECT * FROM `arbol`;";
         try{
             Statement st = (Statement) con.createStatement();
