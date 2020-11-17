@@ -496,7 +496,46 @@ public class TablaPacienteNE extends javax.swing.JFrame {
         }
         
     }
+    public DoubleLinkedList<PacienteNE> LlenarListall() throws SQLException{
+        
+        DoubleLinkedList<PacienteNE> ListaN = new DoubleLinkedList<>();
+        ListaPacientesNE = ListaN;
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+        String fecha;
 
+        String SQL = "SELECT * FROM `paciente_ne`;";
+        
+        try{
+            Statement st = (Statement) con.createStatement();
+            ResultSet rs = (ResultSet) st.executeQuery(SQL);
+            while(rs.next()){
+
+                
+                fecha = formatoFecha.format(rs.getDate("FechaIngreso"));
+
+                PacienteNE Juanito = new PacienteNE(
+                        Integer.parseInt(rs.getString("IdN")),
+                        rs.getString("Nombre"),
+                        Integer.parseInt(rs.getString("Cedula")),
+                        rs.getString("Telefono"),
+                        rs.getString("Direccion"),
+                        fecha,
+                        Integer.parseInt(rs.getString("N_Arboles")),
+                        Integer.parseInt(rs.getString("R_Biologico")),
+                        Integer.parseInt(rs.getString("Contactado"))                       
+                        );
+                ListaPacientesNE.insert(Juanito);
+            }
+
+        }
+        catch(Exception e){
+            
+            JOptionPane.showMessageDialog(null, "No se pudo añadir a la lista" +e.getMessage());
+
+            
+        }
+        return ListaPacientesNE;
+    }
     public PacienteNE busqueda(int id){
         if(ListaPacientesNE.isEmpty()){return null;}
         Node<PacienteNE> busqueda = ListaPacientesNE.first;
