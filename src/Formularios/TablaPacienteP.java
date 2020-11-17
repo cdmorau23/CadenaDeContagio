@@ -6,6 +6,9 @@
 package Formularios;
 
 import ClasesPaciente.PacienteP;
+import ClasesPaciente.PacienteNE;
+import static Formularios.Main.aa;
+import static Formularios.TablaPacienteNE.ListaPacientesNE;
 import conexionSQL.conexionSQL;
 import utils.DoubleLinkedList;
 import utils.MyStack;
@@ -534,14 +537,21 @@ public class TablaPacienteP extends javax.swing.JFrame {
         int filaSeleccionada = tablaPersona.getSelectedRow();
         int Id = Integer.parseInt((String)tablaPersona.getValueAt(filaSeleccionada, 0));
         PacienteP paciente = busqueda(Id);
-        try{
+        try{            
             
             Statement st= (Statement) con.createStatement();
             String SQL = paciente.getDelete();
             Respaldo.push(paciente);
             ListaPacientesP.delete(paciente);
-
+            //Borrado de arbol
+            Arbol ar=new Arbol();
+            ar.llenarar();
+            
+            String SQL1 = "DELETE FROM `arbol` WHERE `arbol`.`Paciente+_Id+` = "+Id+"";
+            st.execute(SQL1);
+            
             st.execute(SQL);
+            
             
             
             JOptionPane.showMessageDialog(null, "Registro eliminado");
@@ -638,6 +648,22 @@ public class TablaPacienteP extends javax.swing.JFrame {
         
         
         
+    }
+    
+    public PacienteNE busquedaNE(int id){
+        if(ListaPacientesNE.isEmpty()){return null;}
+        Node<PacienteNE> busqueda = ListaPacientesNE.first;
+        
+        while(busqueda.value != null){
+            if (busqueda.value.getId()==id){
+                break;
+            }
+            busqueda = busqueda.next;  
+        }
+        if(busqueda == null){
+            return null;
+        }
+    return busqueda.value;
     }
     
 
