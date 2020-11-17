@@ -6,7 +6,6 @@
 package Formularios;
 
 import ClasesPaciente.Acciones;
-import ClasesPaciente.Arbol;
 import ClasesPaciente.PacienteNE;
 import ClasesPaciente.PacienteP;
 import conexionSQL.conexionSQL;

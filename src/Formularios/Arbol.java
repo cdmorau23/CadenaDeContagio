@@ -1,6 +1,6 @@
-package ClasesPaciente;
+package Formularios;
 
-import static Formularios.TablaPacienteNE.ListaPacientesNE;
+import ClasesPaciente.PacienteNE;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
@@ -15,82 +15,62 @@ import utils.Node;
 public class Arbol{
     public static conexionSQL cc;
     public static Connection con ;
-    private int IdP;
-    private int Idne;
-    public static DoubleLinkedList<Arbol>aa;
+    public static DoubleLinkedList<ClaseArbol>aa;
 
 
-    public Arbol(int idP, int idne,conexionSQL cc, Connection con,DoubleLinkedList<Arbol>aa) {
-        this.cc=cc;
-        this.con = con;
-        IdP = idP;
-        Idne = idne;
+    public Arbol() {
+        Arbol.cc=Main.cc;
+        Arbol.con = Main.con;
+        Arbol.aa = Main.aa;
     }
 
-    Arbol() {
-    }
-
-    public int getIdP() {
-        return IdP;
-    }
-
-    public void setIdP(int idP) {
-        IdP = idP;
-    }
-
-    public int getIdne() {
-        return Idne;
-    }
-
-    public void setIdne(int idne) {
-        Idne = idne;
-    }
-    public void insertar() {
+    public void insertar(ClaseArbol a) {
         
-        if(this.buscarPareja()){}
+        if(buscarPareja(a)){       }
         else{
-        String inser="INSERT INTO `arbol`(`Paciente+_Id+`, `Paciente_NE_IdN`) VALUES ("+this.getIdP()+","+this.getIdne()+");";
+        String inser="INSERT INTO `arbol`(`Paciente+_Id+`, `Paciente_NE_IdN`) VALUES ("+a.IdP+","+a.IdNE+");";
         try {
             PreparedStatement pst =(PreparedStatement) con.prepareStatement(inser);
             pst.execute();
+            aa.insert(a);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Registro en arbol No Exitoso"+e.getMessage());
         }
         }
     }
-    public void delete(){
-        String del="DELETE FROM `arbol` WHERE `Paciente+_Id+`="+this.getIdP()+" AND `Paciente_NE_IdN`="+this.getIdne()+";";
+    public void delete(ClaseArbol a){
+        String del="DELETE FROM `arbol` WHERE `Paciente+_Id+`="+a.IdP+" AND `Paciente_NE_IdN`="+a.IdNE+";";
         try {
             PreparedStatement pst =(PreparedStatement) con.prepareStatement(del);
             pst.execute();
+            aa.delete(a);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "R No Exitoso"+e.getMessage());
         }
     }
-    public DoubleLinkedList<Arbol> llenarar(){
+    public void llenarar(){
         String SQL="SELECT * FROM `arbol`;";
         try{
             Statement st = (Statement) con.createStatement();
             ResultSet rs = (ResultSet) st.executeQuery(SQL);
             while(rs.next()){
-                Arbol arr=new Arbol(Integer.parseInt(rs.getString("Paciente+_Id+")),
-                        Integer.parseInt(rs.getString("Paciente_NE_IdN")),this.cc,this.con,this.aa);
-                    aa.insert(arr);
+                ClaseArbol arr=new ClaseArbol(Integer.parseInt(rs.getString("Paciente+_Id+")),
+                        Integer.parseInt(rs.getString("Paciente_NE_IdN")));
+                 aa.insert(arr);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return aa;
     }
     
-    public boolean buscarPareja(){
+    public boolean buscarPareja(ClaseArbol a){
         
         if (aa.isEmpty()){return false;}
         
-        Node<Arbol> busqueda = aa.first;
+        Node<ClaseArbol> busqueda = aa.first;
         
         for(int i =0;i<aa.length();i++){
-            if ((busqueda.value.getIdP()==IdP) && ((busqueda.value.getIdne()==Idne))){
+            if ((busqueda.value.IdP==a.IdP) && ((busqueda.value.IdNE==a.IdNE))){
                 return true;
             }
             busqueda = busqueda.next;  
@@ -102,8 +82,6 @@ public class Arbol{
     }
     
     public static void main(String args[]){
-        PacienteNE nn=new PacienteNE();
-        int i=nn.nAr(3);
-        System.out.println(i);
+        
     }
 }

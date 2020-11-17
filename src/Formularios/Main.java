@@ -31,15 +31,21 @@ public class Main extends javax.swing.JFrame {
     public static MyStack<PacienteP> RespaldoP = new MyStack<PacienteP>();
     public static conexionSQL cc = new conexionSQL();
     public static Connection con = (Connection) cc.conexion();
-    public static DoubleLinkedList<ClaseArbol>aa=new DoubleLinkedList<>();
+    public static DoubleLinkedList<ClaseArbol>aa = new DoubleLinkedList<>();
+    
 
     public Main() {
         
+        Arbol ar=new Arbol();
+        ar.llenarar();
+        
+        while(aa.first!=null){
+            System.out.println(aa.getFirst().IdP+"  "+aa.getFirst().IdNE);
+            aa.deleteFirst();
+        }
+        this.setLocationRelativeTo(null);
         initComponents();
-        
-        
-        
-        
+               
         
     }
 
