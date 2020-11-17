@@ -103,7 +103,7 @@ public class Arbol{
     
     public static void main(String args[]){
         PacienteNE nn=new PacienteNE();
-        int i=nn.nAr(3);
+        int i=nn.nAr();
         System.out.println(i);
     }
 }
