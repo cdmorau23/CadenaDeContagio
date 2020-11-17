@@ -8,6 +8,7 @@ package ClasesPaciente;
 
 
 
+import Formularios.Arbol;
 import Formularios.TablaPacienteNE;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -201,22 +202,6 @@ public class PacienteNE {
     public void setDelete(String delete) {
         Delete = delete;
     }
-    public int nAr(){
-        int count=0;
-        Arbol ap=new Arbol();
-        DoubleLinkedList<Arbol>ar=ap.llenarar();
-        for(int i=0; i<ar.length();i++){
-            if(this.id==ar.getAtIndex(i).getIdne()){
-                count++;
-            }
-        }
-        this.N_Arboles=count;
-        return count;
-        
-    }
-
-    int nAr(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
 }

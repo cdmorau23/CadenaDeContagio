@@ -6,7 +6,6 @@
 package Formularios;
 
 import ClasesPaciente.Acciones;
-import ClasesPaciente.Arbol;
 import ClasesPaciente.PacienteNE;
 import ClasesPaciente.PacienteP;
 import conexionSQL.conexionSQL;
@@ -25,6 +24,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import utils.ArbolBinario;
 
 
 /**
@@ -46,6 +46,7 @@ public class TablaPacienteNE extends javax.swing.JFrame {
 
     
     public TablaPacienteNE(int IDContacto, Main Origen) throws SQLException {
+        
         TablaPacienteNE.contacto = IDContacto;
         TablaPacienteNE.ListaPacientesNE = Main.ListaPacientesNE;
         TablaPacienteNE.AtrasNE= Main.RespaldoNE;
@@ -68,6 +69,10 @@ public class TablaPacienteNE extends javax.swing.JFrame {
         
         
 
+    }
+
+    public TablaPacienteNE() {
+        //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -635,7 +640,7 @@ public class TablaPacienteNE extends javax.swing.JFrame {
         
     }
     
-    public void mostrarDatos(){
+    public void mostrarDatos() {
               
         
         String[] titulos = {"IdN","Nombre","Cedula","Telefono","Direccion","FechaIngreso","N_Arboles","R_Biologico"};
@@ -784,7 +789,7 @@ public class TablaPacienteNE extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
