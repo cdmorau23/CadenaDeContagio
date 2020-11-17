@@ -174,7 +174,7 @@ public class PacienteNE {
     }
 
     public String getUpdate() {
-        this.setUpdate("UPDATE `paciente_ne` SET `IdN`="+this.getId()+",`Nombre`='"+this.getNombre()+"',`Cedula`="+this.getCedula()+",`Telefono`='"+this.getTelefono()+"',`Direccion`='"+this.getDireccion()+"',`FechaIngreso`= '"+this.getFechaFormato()+"',`R_Biologico`= '"+this.getR_Biologico()+"',`N_Arboles`= "+this.getN_Arboles()+",`Contactado`= "+this.Contactado+" , WHERE `paciente_ne`.`IdN` ="+this.getId()+";");
+        this.setUpdate("UPDATE `paciente_ne` SET `IdN`="+this.getId()+",`Nombre`='"+this.getNombre()+"',`Cedula`="+this.getCedula()+",`Telefono`='"+this.getTelefono()+"',`Direccion`='"+this.getDireccion()+"',`FechaIngreso`= '"+this.getFechaFormato()+"',`R_Biologico`= '"+this.getR_Biologico()+"',`N_Arboles`= "+this.getN_Arboles()+",`Contactado`= "+this.Contactado+" WHERE `paciente_ne`.`IdN` ="+this.getId()+";");
 
         return Update;
     }
