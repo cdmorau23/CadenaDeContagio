@@ -528,8 +528,6 @@ public class TablaPacienteP extends javax.swing.JFrame {
         }
         catch(Exception e){
         JOptionPane.showMessageDialog(null, "Registro No editado de manera Exitosa"+e.getMessage());
-
-
         }
     }
     

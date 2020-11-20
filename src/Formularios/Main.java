@@ -8,11 +8,17 @@ package Formularios;
 import ClasesPaciente.Acciones;
 import ClasesPaciente.PacienteNE;
 import ClasesPaciente.PacienteP;
+import static Formularios.TablaPacienteNE.ListaPacientesNE;
+import static Formularios.TablaPacienteNE.con;
 import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
 import conexionSQL.conexionSQL;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import utils.DoubleLinkedList;
 import utils.MyStack;
 
@@ -77,6 +83,11 @@ public class Main extends javax.swing.JFrame {
         Fondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, -1, -1));
 
         jButton2.setText("Cola de Contactos");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         Fondo.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -113,6 +124,56 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            // TODO add your handling code here:
+            LlenarListaparaarbol();
+            Contactar cn= new Contactar(ListaPacientesNE);
+            cn.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+    public void LlenarListaparaarbol() throws SQLException{
+        
+        DoubleLinkedList<PacienteNE> ListaN = new DoubleLinkedList<>();
+        ListaPacientesNE = ListaN;
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+        String fecha;
+
+        String SQL = "SELECT * FROM `paciente_ne`;";
+        
+        try{
+            Statement st = (Statement) con.createStatement();
+            ResultSet rs = (ResultSet) st.executeQuery(SQL);
+            while(rs.next()){
+
+                
+                fecha = formatoFecha.format(rs.getDate("FechaIngreso"));
+
+                PacienteNE Juanito = new PacienteNE(
+                        Integer.parseInt(rs.getString("IdN")),
+                        rs.getString("Nombre"),
+                        Integer.parseInt(rs.getString("Cedula")),
+                        rs.getString("Telefono"),
+                        rs.getString("Direccion"),
+                        fecha,
+                        Integer.parseInt(rs.getString("N_Arboles")),
+                        Integer.parseInt(rs.getString("R_Biologico")),
+                        Integer.parseInt(rs.getString("Contactado"))                       
+                        );
+                ListaPacientesNE.insert(Juanito);
+            }
+
+        }
+        catch(Exception e){
+            
+            JOptionPane.showMessageDialog(null, "No se pudo añadir a la lista" +e.getMessage());
+
+            
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */
