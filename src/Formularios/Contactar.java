@@ -26,27 +26,26 @@ import utils.Myqueue;
  * @author sordo
  */
 public class Contactar extends javax.swing.JFrame {
-
+    Myqueue<PacienteNE> priori=new Myqueue<>();
     /**
      * Creates new form Contactar
      */
     public Contactar(DoubleLinkedList<PacienteNE>nne) throws SQLException {
         ArbolBinario abo = new ArbolBinario ();
-        Myqueue<PacienteNE> priori=new Myqueue<>();
         for(int i=0;i<nne.length();i++){
             abo.insertar(nne.getAtIndex(i));
         }
         abo.imprimirPre(priori);
         initComponents();
         btprueba.setVisible(false);
-        mostrarDatos(priori);
+        mostrarDatos();
     }
 
     private Contactar() {
         
          //To change body of generated methods, choose Tools | Templates.
     }
-    public void mostrarDatos(Myqueue<PacienteNE>priori) throws SQLException{
+    public void mostrarDatos() throws SQLException{
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
         String fecha;
         fecha = formatoFecha.format(priori.peek().FechaIngreso);
@@ -191,6 +190,12 @@ public class Contactar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Positiva");
         }else{
             JOptionPane.showMessageDialog(null, "Negativa");
+        }
+        priori.dequeue();
+        try {
+            mostrarDatos();
+        } catch (SQLException ex) {
+            Logger.getLogger(Contactar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btpruebaActionPerformed
 
