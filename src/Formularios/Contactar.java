@@ -39,6 +39,7 @@ public class Contactar extends javax.swing.JFrame {
         abo.imprimirPre(priori);
         initComponents();
         btprueba.setVisible(false);
+        mostrarDatos(priori);
     }
 
     private Contactar() {
@@ -56,7 +57,8 @@ public class Contactar extends javax.swing.JFrame {
                 if(priori.peek().R_Biologico==1){
                   jLabel12.setText("TRUE");}else{
                   jLabel12.setText("FALSE");}
-                jLabel13.setText(fecha);
+                jLabel13.setText(String.valueOf(priori.peek().N_Arboles));
+                jLabel15.setText(fecha);
                     
     }
     /**
