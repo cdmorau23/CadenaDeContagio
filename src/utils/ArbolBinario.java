@@ -92,73 +92,24 @@ public class ArbolBinario {
     
     
 
-      private void imprimirPre (Nodo reco)
+      private void imprimirPre (Nodo reco, Myqueue<PacienteNE>nn)
       {
           if (reco != null)
           {
+              nn.enqueue(reco.nn);
               System.out.print(reco.nn.Nombre + " ");
-              imprimirPre (reco.der);
-              imprimirPre (reco.izq);
+              imprimirPre (reco.der,nn);
+              imprimirPre (reco.izq,nn);
               
           }
       }
 
-      public void imprimirPre ()
+      public void imprimirPre (Myqueue<PacienteNE>nn)
       {
-          imprimirPre (raiz);
+          imprimirPre (raiz, nn);
           System.out.println();
       }
-      
-      public void LlenarArbol() throws SQLException{
-          this.LlenarLista();
-          while(ListaPacientesNE.size>0){
-              this.insertar(ListaPacientesNE.getFirst());
-              ListaPacientesNE.deleteFirst();
-          }
-          this.LlenarLista();
-      }
-      
-      public void LlenarLista() throws SQLException{
         
-        DoubleLinkedList<PacienteNE> ListaN = new DoubleLinkedList<>();
-        ListaPacientesNE = ListaN;
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
-        String fecha;
-
-        String SQL = "SELECT * FROM `paciente_ne`;";
-        
-        try{
-            Statement st = (Statement) con.createStatement();
-            ResultSet rs = (ResultSet) st.executeQuery(SQL);
-            while(rs.next()){
-
-                
-                fecha = formatoFecha.format(rs.getDate("FechaIngreso"));
-
-                PacienteNE Juanito = new PacienteNE(
-                        Integer.parseInt(rs.getString("IdN")),
-                        rs.getString("Nombre"),
-                        Integer.parseInt(rs.getString("Cedula")),
-                        rs.getString("Telefono"),
-                        rs.getString("Direccion"),
-                        fecha,
-                        Integer.parseInt(rs.getString("N_Arboles")),
-                        Integer.parseInt(rs.getString("R_Biologico")),
-                        Integer.parseInt(rs.getString("Contactado"))                       
-                        );
-                ListaPacientesNE.insert(Juanito);
-            }
-
-        }
-        catch(Exception e){
-            
-            JOptionPane.showMessageDialog(null, "No se pudo añadir a la lista" +e.getMessage());
-
-            
-        }
-        
-    }
-         
     public boolean pacienteseleccion(PacienteNE n1,PacienteNE n2){
         
         if(n1.R_Biologico>n2.R_Biologico){
