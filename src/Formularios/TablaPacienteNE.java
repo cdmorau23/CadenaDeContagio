@@ -698,12 +698,6 @@ public class TablaPacienteNE extends javax.swing.JFrame {
     
     public void mostrarDatos() throws SQLException{
               
-        ArbolBinario abo = new ArbolBinario ();
-        LlenarLista();
-        for(int i=0;i<ListaPacientesNE.length();i++){
-            abo.insertar(ListaPacientesNE.getAtIndex(i));
-        }
-        abo.imprimirPre();
         String[] titulos = {"IdN","Nombre","Cedula","Telefono","Direccion","FechaIngreso","N_Arboles","R_Biologico"};
         String[] registros = new String[10];
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
