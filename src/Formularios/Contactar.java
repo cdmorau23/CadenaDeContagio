@@ -197,6 +197,8 @@ public class Contactar extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Contactar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        btprueba.setVisible(false);
+        btcontacto.setVisible(true);
     }//GEN-LAST:event_btpruebaActionPerformed
 
     /**
