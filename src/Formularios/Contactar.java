@@ -11,6 +11,7 @@ import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -36,36 +37,27 @@ public class Contactar extends javax.swing.JFrame {
             abo.insertar(nne.getAtIndex(i));
         }
         abo.imprimirPre(priori);
-        System.out.println(priori.dequeue().Cedula);
-        mostrarDatos(priori);
         initComponents();
+        btprueba.setVisible(false);
     }
 
     private Contactar() {
+        
          //To change body of generated methods, choose Tools | Templates.
     }
     public void mostrarDatos(Myqueue<PacienteNE>priori) throws SQLException{
-              
-        String[] titulos = {"IdN","Nombre","Cedula","Telefono","Direccion","FechaIngreso","N_Arboles","R_Biologico"};
-        String[] registros = new String[10];
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
         String fecha;
-        DefaultTableModel modelo = new DefaultTableModel(null,titulos);
-        
-                registros[0] = String.valueOf(priori.peek().id);
-                registros[1] = priori.peek().Nombre;
-                registros[2] = String.valueOf(priori.peek().Cedula);
-                registros[3] = priori.peek().Telefono;
-                registros[4] = priori.peek().Direccion;
-                fecha = formatoFecha.format(priori.peek().FechaIngreso);
-                registros[5] = fecha;
-                registros[6] = String.valueOf(priori.peek().N_Arboles);
-                
+        fecha = formatoFecha.format(priori.peek().FechaIngreso);
+                jLabel8.setText(priori.peek().Nombre);
+                jLabel9.setText(String.valueOf(priori.peek().Cedula));
+                jLabel10.setText(priori.peek().Telefono);
+                jLabel11.setText(priori.peek().Direccion);
                 if(priori.peek().R_Biologico==1){
-                  registros[7] = "TRUE"; }else{
-                  registros[7] = "FALSE"; } 
-                modelo.addRow(registros);
-                jTable1.setModel(modelo);       
+                  jLabel12.setText("TRUE");}else{
+                  jLabel12.setText("FALSE");}
+                jLabel13.setText(fecha);
+                    
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,9 +71,22 @@ public class Contactar extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtContactar = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         btcontacto = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        btprueba = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,44 +95,102 @@ public class Contactar extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Personas a contactar");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
         jPanel1.add(txtContactar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 250, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 290, 100));
-
         btcontacto.setText("Contactar");
-        jPanel1.add(btcontacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, -1, -1));
+        btcontacto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btcontactoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btcontacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, -1, -1));
+
+        jLabel2.setText("Nombre");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 60, -1));
+
+        jLabel3.setText("Cedula");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 40, -1));
+
+        jLabel4.setText("Telefono");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, -1));
+
+        jLabel5.setText("Dirección");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, -1, -1));
+
+        jLabel6.setText(" Riego Biologico");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 90, -1));
+
+        jLabel7.setText("N arboles");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 60, 20));
+
+        jLabel8.setText("jLabel8");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, -1));
+
+        jLabel9.setText("jLabel9");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, -1, -1));
+
+        jLabel10.setText("jLabel10");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, -1, -1));
+
+        jLabel11.setText("jLabel11");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, -1, -1));
+
+        jLabel12.setText("jLabel12");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, -1));
+
+        jLabel13.setText("jLabel13");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, -1, 20));
+
+        jLabel14.setText("Fecha ingreso");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, 20));
+
+        jLabel15.setText("jLabel15");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, 20));
+
+        btprueba.setText("Realizar Prueba");
+        btprueba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btpruebaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btprueba, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 170, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btcontactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btcontactoActionPerformed
+        JOptionPane.showMessageDialog(null, "Contactado con exito");
+        btprueba.setVisible(true);
+        btcontacto.setVisible(false);
+    // TODO add your handling code here:
+    }//GEN-LAST:event_btcontactoActionPerformed
+
+    private void btpruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btpruebaActionPerformed
+        // TODO add your handling code here
+        Random rn=new Random();
+        int result=rn.nextInt(2);
+        if(result==1){
+            JOptionPane.showMessageDialog(null, "Positiva");
+        }else{
+            JOptionPane.showMessageDialog(null, "Negativa");
+        }
+    }//GEN-LAST:event_btpruebaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,10 +229,23 @@ public class Contactar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btcontacto;
+    private javax.swing.JButton btprueba;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel txtContactar;
     // End of variables declaration//GEN-END:variables
 }
