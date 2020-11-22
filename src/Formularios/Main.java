@@ -130,6 +130,7 @@ public class Main extends javax.swing.JFrame {
             LlenarListaparaarbol();
             Contactar cn= new Contactar(ListaPacientesNE);
             cn.setVisible(true);
+            this.setVisible(false);
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

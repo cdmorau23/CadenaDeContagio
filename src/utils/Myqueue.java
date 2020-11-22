@@ -58,6 +58,11 @@ public class Myqueue<T>{
     public boolean isEmpty(){
         return this.getLength() == 0;
     }
+    public void limpiar(){
+        front=null;
+        back=null;
+        length=0;
+    }
 
     public Integer getLength() {
         return this.length;
