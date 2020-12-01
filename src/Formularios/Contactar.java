@@ -6,7 +6,11 @@
 package Formularios;
 
 import ClasesPaciente.PacienteNE;
+import ClasesPaciente.PacienteP;
 import static Formularios.TablaPacienteNE.*;
+import static Formularios.TablaPacienteP.ListaPacientesP;
+import static Formularios.TablaPacienteP.con;
+import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,6 +31,11 @@ import utils.Myqueue;
  */
 public class Contactar extends javax.swing.JFrame {
     Myqueue<PacienteNE> priori=new Myqueue<>();
+    TablaPacienteNE tpne=new TablaPacienteNE();
+    PacienteNE ne=new PacienteNE();
+    String deletene;
+    String deletearbol;
+    String change;
     /**
      * Creates new form Contactar
      */
@@ -188,8 +197,45 @@ public class Contactar extends javax.swing.JFrame {
         int result=rn.nextInt(2);
         if(result==1){
             JOptionPane.showMessageDialog(null, "Positiva");
+            PacienteP pp=new PacienteP(null, priori.peek().Nombre, priori.peek().Cedula, priori.peek().Direccion, priori.peek().Direccion,"");
+            ne=tpne.busqueda(priori.peek().id);
+            deletene=ne.getDelete();
+            deletearbol=ne.getDeleteArbol();
+            try {
+                Statement st= (Statement) con.createStatement();
+                st.execute(deletearbol);
+                st.execute(deletene);
+                ListaPacientesNE.delete(ne);
+                String SQL= pp.getInsert();
+                PreparedStatement pst =(PreparedStatement) con.prepareStatement(SQL);           
+                pst.execute();
+                ListaPacientesP.insert(pp);
+            
+            JOptionPane.showMessageDialog(null, "Registro eliminado");
+            JOptionPane.showMessageDialog(null, "RegistroExitoso");   
+        }
+        catch(Exception e){
+                JOptionPane.showMessageDialog(null, "R No Exitoso"+e.getMessage());
+                JOptionPane.showMessageDialog(null, "Error al eliminar registro"+ e.getMessage());
+            }
+            
         }else{
             JOptionPane.showMessageDialog(null, "Negativa");
+            
+            ne=tpne.busqueda(priori.peek().id);
+            deletene=ne.getDelete();
+            deletearbol=ne.getDeleteArbol();
+            try {
+                Statement st= (Statement) con.createStatement();
+                st.execute(deletearbol);
+                st.execute(deletene);
+                ListaPacientesNE.delete(ne);
+
+            
+            JOptionPane.showMessageDialog(null, "Registro eliminado");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error al eliminar registro"+ e.getMessage());
+            }
         }
         priori.dequeue();
         try {

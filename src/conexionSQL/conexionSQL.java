@@ -6,7 +6,7 @@
 package conexionSQL;
 
 
-import java.sql.Connection;
+import java.sql.*;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 
