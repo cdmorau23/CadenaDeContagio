@@ -103,7 +103,7 @@ public class Main extends javax.swing.JFrame {
         Fondo.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, -1, 80));
 
         jLabel1.setText("Contactar");
-        Fondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 50, -1));
+        Fondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 70, -1));
 
         jLabel2.setText("Administrar Pacientes");
         Fondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, -1, 30));

@@ -173,7 +173,7 @@ public class Contactar extends javax.swing.JFrame {
         jButton1.setBorder(null);
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -213,7 +213,7 @@ public class Contactar extends javax.swing.JFrame {
         if(result==1){
             JOptionPane.showMessageDialog(null, "Positiva");
             PacienteP pp=new PacienteP(null, priori.peek().Nombre, priori.peek().Cedula, priori.peek().Direccion, priori.peek().Direccion,"");
-            ne=tpne.busqueda(priori.peek().id);
+            ne=tpne.busquedaCC(priori.peek().getCedula());
             deletene=ne.getDelete();
             deletearbol=ne.getDeleteArbol();
             try {
@@ -237,7 +237,7 @@ public class Contactar extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Negativa");
             
-            ne=tpne.busqueda(priori.peek().id);
+            ne=tpne.busquedaCC(priori.peek().getCedula());
             deletene=ne.getDelete();
             deletearbol=ne.getDeleteArbol();
             try {
