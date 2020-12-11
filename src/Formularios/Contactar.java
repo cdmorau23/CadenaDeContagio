@@ -212,51 +212,20 @@ public class Contactar extends javax.swing.JFrame {
         int result=rn.nextInt(2);
         if(result==1){
             JOptionPane.showMessageDialog(null, "Positiva");
-            PacienteP pp=new PacienteP(null, priori.peek().Nombre, priori.peek().Cedula, priori.peek().Direccion, priori.peek().Direccion,"");
-            ne=tpne.busquedaCC(priori.peek().getCedula());
-            deletene=ne.getDelete();
-            deletearbol=ne.getDeleteArbol();
+            priori.dequeue();
             try {
-                Statement st= (Statement) con.createStatement();
-                st.execute(deletearbol);
-                st.execute(deletene);
-                ListaPacientesNE.delete(ne);
-                String SQL= pp.getInsert();
-                PreparedStatement pst =(PreparedStatement) con.prepareStatement(SQL);           
-                pst.execute();
-                ListaPacientesP.insert(pp);
-            
-            JOptionPane.showMessageDialog(null, "Registro eliminado");
-            JOptionPane.showMessageDialog(null, "RegistroExitoso");   
-        }
-        catch(Exception e){
-                JOptionPane.showMessageDialog(null, "R No Exitoso"+e.getMessage());
-                JOptionPane.showMessageDialog(null, "Error al eliminar registro"+ e.getMessage());
+                mostrarDatos();
+            } catch (SQLException ex) {
+                Logger.getLogger(Contactar.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
         }else{
             JOptionPane.showMessageDialog(null, "Negativa");
-            
-            ne=tpne.busquedaCC(priori.peek().getCedula());
-            deletene=ne.getDelete();
-            deletearbol=ne.getDeleteArbol();
+            priori.dequeue();
             try {
-                Statement st= (Statement) con.createStatement();
-                st.execute(deletearbol);
-                st.execute(deletene);
-                ListaPacientesNE.delete(ne);
-
-            
-            JOptionPane.showMessageDialog(null, "Registro eliminado");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error al eliminar registro"+ e.getMessage());
+                mostrarDatos();
+            } catch (SQLException ex) {
+                Logger.getLogger(Contactar.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        priori.dequeue();
-        try {
-            mostrarDatos();
-        } catch (SQLException ex) {
-            Logger.getLogger(Contactar.class.getName()).log(Level.SEVERE, null, ex);
         }
         btprueba.setVisible(false);
         btcontacto.setVisible(true);
