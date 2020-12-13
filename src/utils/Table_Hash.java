@@ -30,7 +30,17 @@ public class Table_Hash {
             nn[indice]=elem;
         }
     }
-    public void mostrar(){
-    
+    public PacienteNE mostrar(int indice){
+        PacienteNE elem=new PacienteNE();
+        if(nn[indice]==null){
+            return null;
+        }
+        else{
+            elem=nn[indice];
+            return elem;
+        }
+    }
+    public void eliminar(int indice){
+        nn[indice]=null;
     }
 }
