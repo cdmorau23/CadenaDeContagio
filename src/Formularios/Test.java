@@ -5,8 +5,11 @@
  */
 package Formularios;
 
+import ClasesPaciente.PacienteNE;
 import ClasesPaciente.PacienteP;
+import utils.ArbolBinario;
 import utils.DoubleLinkedList;
+import utils.Myqueue;
 import utils.Node;
 
 /**
@@ -17,9 +20,9 @@ public class Test {
  
     public static void main(String[] args) throws InterruptedException {
          
-        DoubleLinkedList<PacienteP> LISTA = new DoubleLinkedList<PacienteP>();
+        DoubleLinkedList<PacienteNE> LISTA = new DoubleLinkedList<PacienteNE>();
         
-        int casos = 100000000;
+        int casos = 1000;
 
         int Id = casos-1;
 
@@ -27,31 +30,29 @@ public class Test {
         
         for (int i = 0; i < casos ;i++){
         int CedulaRandom = (int) Math.floor(Math.random()*casos);
-        PacienteP juanito = new PacienteP ((i),"Juancho",CedulaRandom,"165519606","calle de juancho","200-03-12");
+        PacienteNE juanito = new PacienteNE ((i),"Juancho",CedulaRandom,"165519606","calle de juancho","200-03-12",1,1,1);
         LISTA.insert(juanito);       
         }
         
         long finInsert = System.currentTimeMillis();
         double tiempoB = (double) ((finInsert - inicioInsert));
         System.out.println(tiempoB +" milisegundos");
-
+        Myqueue nn=new Myqueue();
+        ArbolBinario bb=new ArbolBinario();
+        for(int i=0; i<LISTA.length()-1;i++){
+            bb.insertar(LISTA.getAtIndex(i));
+        }
+        bb.imprimirPre(nn);
+        finInsert = System.currentTimeMillis();
+        tiempoB = (double) ((finInsert - inicioInsert));
+        System.out.println(tiempoB +" milisegundos");
         
-               
-        long inicio = System.currentTimeMillis();       
-        
-        busqueda(Id,LISTA);
-         
-        long fin = System.currentTimeMillis();
-         
-        double tiempo = (double) ((fin - inicio));
-         
-        System.out.println(tiempo +" milisegundos");
          
     }
     
-     static  PacienteP busqueda(int id, DoubleLinkedList<PacienteP> LISTA){
+     static  PacienteNE busqueda(int id, DoubleLinkedList<PacienteNE> LISTA){
     
-        Node<PacienteP> busqueda = LISTA.first;
+        Node<PacienteNE> busqueda = LISTA.first;
         
         while(busqueda != null){
             if (busqueda.value.getId()==id){
