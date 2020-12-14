@@ -69,6 +69,8 @@ public class Main extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -78,7 +80,8 @@ public class Main extends javax.swing.JFrame {
         Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Formularios/iconos/icons8_User_96px_2.png"))); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Formularios/iconos/seguidores.png"))); // NOI18N
         jButton1.setBorder(null);
         jButton1.setBorderPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -86,11 +89,11 @@ public class Main extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        Fondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
+        Fondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 80, 80));
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Formularios/iconos/icons8_Today_96px.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Formularios/iconos/llamada-telefonica (1).png"))); // NOI18N
         jButton2.setToolTipText("");
         jButton2.setBorder(null);
         jButton2.setBorderPainted(false);
@@ -100,13 +103,21 @@ public class Main extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        Fondo.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, -1, 80));
+        Fondo.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 80, 80));
 
         jLabel1.setText("Contactar");
-        Fondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 70, -1));
+        Fondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 70, -1));
 
         jLabel2.setText("Administrar Pacientes");
-        Fondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, -1, 30));
+        Fondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, -1, 30));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Formularios/iconos/cadenaGrande.png"))); // NOI18N
+        Fondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
+
+        jButton3.setBackground(new java.awt.Color(88, 197, 226));
+        jButton3.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 11)); // NOI18N
+        jButton3.setText("CADENA DE CONTAGIO");
+        Fondo.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
 
         getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 400, 300));
 
@@ -217,7 +228,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel Fondo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
